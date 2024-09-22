@@ -21,11 +21,11 @@
     </div>
     <div v-if="activeTab === 1" class="tab-content">
       <h2>LTC</h2>
-      <TimeCounter :startDate="new Date('2024-09-22T15:00:00')" />
+      <TimeCounter :startDate="new Date('2024-09-21T11:50:00')" />
     </div>
     <div v-if="activeTab === 2" class="tab-content">
       <h2>LTR</h2>
-      <TimeCounter :startDate="new Date('2024-09-23T10:00:00')" />
+      <TimeCounter :startDate="new Date('2023-12-22T12:00:00')" />
     </div>
   </div>
 </template>
