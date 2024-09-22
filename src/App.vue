@@ -1,58 +1,47 @@
 <template>
-  <div id="app" class="time-passed">
-    <h1>Time Passed</h1>
-    <div class="time-counter">
-      <!-- <p>Since {{ startDate.toLocaleString() }},</p> -->
-      <div class="time-unit">
-        <span>{{ days }}</span>
-        <label>Days</label>
-      </div>
-      <div class="time-unit">
-        <span>{{ hours }}</span>
-        <label>Hours</label>
-      </div>
-      <div class="time-unit">
-        <span>{{ minutes }}</span>
-        <label>Minutes</label>
-      </div>
-      <div class="time-unit">
-        <span>{{ seconds }}</span>
-        <label>Seconds</label>
-      </div>
-
+  <div id="app">
+    <h1>Interactive Time Counters</h1>
+    
+    <!-- Tabs for Switching Between Time Counters -->
+    <div class="tabs">
+      <button 
+        v-for="(tab, index) in tabs" 
+        :key="index" 
+        :class="{ active: activeTab === index }" 
+        @click="activeTab = index"
+      >
+        {{ tab }}
+      </button>
     </div>
-    <h1>🙂</h1>
+
+    <!-- Display the Active Time Counter -->
+    <div v-if="activeTab === 0" class="tab-content">
+      <h2>LTM</h2>
+      <TimeCounter :startDate="new Date('2024-09-21T20:56:00')" />
+    </div>
+    <div v-if="activeTab === 1" class="tab-content">
+      <h2>LTC</h2>
+      <TimeCounter :startDate="new Date('2024-09-22T15:00:00')" />
+    </div>
+    <div v-if="activeTab === 2" class="tab-content">
+      <h2>LTR</h2>
+      <TimeCounter :startDate="new Date('2024-09-23T10:00:00')" />
+    </div>
   </div>
 </template>
 
 <script>
+import TimeCounter from './components/TimeCounter.vue';
+
 export default {
+  components: {
+    TimeCounter,
+  },
   data() {
     return {
-      startDate: new Date('2024-09-21T20:56:00'), // Replace with your desired start date
-      days: 0,
-      hours: 0,
-      minutes: 0,
-      seconds: 0,
-      interval: null,
+      activeTab: 0,  // Keeps track of the active tab
+      tabs: ['LTM', 'LTC', 'LTR']  // Tab titles
     };
-  },
-  mounted() {
-    this.calculateTimePassed();
-    this.interval = setInterval(this.calculateTimePassed, 1000);
-  },
-  beforeUnmount() {
-    clearInterval(this.interval);
-  },
-  methods: {
-    calculateTimePassed() {
-      const now = new Date();
-      const timeDiff = now.getTime() - this.startDate.getTime();
-      this.days = Math.floor(timeDiff / (1000 * 3600 * 24));
-      this.hours = Math.floor((timeDiff % (1000 * 3600 * 24)) / (1000 * 3600));
-      this.minutes = Math.floor((timeDiff % (1000 * 3600)) / (1000 * 60));
-      this.seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
-    },
   },
 };
 </script>
@@ -61,9 +50,9 @@ export default {
 #app {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  height: 100vh;
+  justify-content: center;
+  min-height: 100vh;
   text-align: center;
   background-color: #282c34;
   color: white;
@@ -75,27 +64,55 @@ h1 {
   margin-bottom: 20px;
 }
 
-.time-counter {
+.tabs {
   display: flex;
   justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
+  margin-bottom: 20px;
 }
 
-.time-unit {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 10px;
-}
-
-.time-unit span {
-  font-size: 2rem;
-  font-weight: bold;
-}
-
-.time-unit label {
+button {
+  background-color: #4caf50;
+  border: none;
+  padding: 10px 20px;
+  margin: 0 10px;
+  color: white;
   font-size: 1rem;
-  margin-top: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+button.active {
+  background-color: #2e7d32;
+}
+
+button:hover {
+  background-color: #66bb6a;
+}
+
+.tab-content {
+  margin-top: 20px;
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  button {
+    font-size: 0.9rem;
+    padding: 8px 16px;
+    margin: 0 5px;
+  }
+
+  .tab-content {
+    font-size: 0.9rem;
+  }
 }
 </style>
