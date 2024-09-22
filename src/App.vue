@@ -27,6 +27,7 @@
       <h2>LTR</h2>
       <TimeCounter :startDate="new Date('2023-12-22T12:00:00')" />
     </div>
+    <h1>🙂🙂🙂</h1>
   </div>
 </template>
 
