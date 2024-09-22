@@ -29,7 +29,7 @@
 export default {
   data() {
     return {
-      startDate: new Date('2024-09-20T17:31:00'), // Replace with your desired start date
+      startDate: new Date('2024-09-21T20:56:00'), // Replace with your desired start date
       days: 0,
       hours: 0,
       minutes: 0,
