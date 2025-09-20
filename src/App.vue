@@ -1,15 +1,13 @@
 <template>
   <div id="app">
     <h1>Interactive Time Counters</h1>
-    
+
+
+
     <!-- Tabs for Switching Between Time Counters -->
     <div class="tabs">
-      <button 
-        v-for="(tab, index) in tabs" 
-        :key="index" 
-        :class="{ active: activeTab === index }" 
-        @click="activeTab = index"
-      >
+      <button v-for="(tab, index) in tabs" :key="index" :class="{ active: activeTab === index }"
+        @click="activeTab = index">
         {{ tab }}
       </button>
     </div>
@@ -17,7 +15,7 @@
     <!-- Display the Active Time Counter -->
     <div v-if="activeTab === 0" class="tab-content">
       <h2>LTM</h2>
-<TimeCounter :startDate="new Date('2025-09-16T10:24:00')" />
+      <TimeCounter :startDate="new Date('2025-09-20T15:55:00')" />
     </div>
     <div v-if="activeTab === 1" class="tab-content">
       <h2>LTC</h2>
@@ -97,8 +95,13 @@ button:hover {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 @media (max-width: 768px) {
