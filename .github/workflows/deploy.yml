@@ -30,7 +30,7 @@ jobs:
 
       # Step 5: Push image to Docker Hub
       - name: Push image to Docker Hub
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/vite-vue-app:latest
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/date-passed:latest
 
       # Step 6: Deploy to Vercel
       - name: Deploy to Vercel
