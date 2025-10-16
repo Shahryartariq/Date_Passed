@@ -2,7 +2,7 @@ name: ▲ Deploy to Vercel (After Docker)
 
 on:
   workflow_run:
-    workflows: ["🐳 Build & Push Docker Image"]  # 👈 depends on docker.yml
+    workflows: ["🐳 Build & Push Docker Image"]
     types:
       - completed
 
@@ -26,7 +26,12 @@ jobs:
       - name: Deploy to Vercel
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
         run: |
-          vercel --token $VERCEL_TOKEN --prod --yes --confirm --scope ${{ secrets.VERCEL_ORG_ID || '' }}
+          # Only include --scope if VERCEL_ORG_ID exists
+          if [ -n "${VERCEL_ORG_ID}" ]; then
+            vercel --token $VERCEL_TOKEN --prod --yes --confirm --scope $VERCEL_ORG_ID
+          else
+            vercel --token $VERCEL_TOKEN --prod --yes --confirm
+          fi
