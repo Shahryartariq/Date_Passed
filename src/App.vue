@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <h1>Interactive Time Counters</h1>
+    <h1>Personal Time Counters</h1>
 
 
 
