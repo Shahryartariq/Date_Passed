@@ -15,7 +15,7 @@
     <!-- Display the Active Time Counter -->
     <div v-if="activeTab === 0" class="tab-content">
       <h2>LTM</h2>
-      <TimeCounter :startDate="new Date('2026-07-25T08:00:00')" />
+      <TimeCounter :startDate="new Date('2026-07-26T13:20:00')" />
     </div>
     <div v-if="activeTab === 1" class="tab-content">
       <h2>LTC</h2>
